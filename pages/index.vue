@@ -3,10 +3,11 @@
     <div>
       <logo />
       <h1 class="title">
-        nuxt-first
+        nuxt
       </h1>
       <button @click="home">home</button>
       <button @click="article">article</button>
+      <button @click="todos">todos</button>
     </div>
   </div>
 </template>
@@ -18,12 +19,23 @@ export default {
   components: {
     Logo
   },
+  mounted() {
+    this.$nextTick(() => {
+      // 页面加载上方进度条
+      this.$nuxt.$loading.start();
+
+      setTimeout(() => this.$nuxt.$loading.finish(), 1000);
+    });
+  },
   methods: {
     home() {
       this.$router.push({ name: "home" });
     },
     article() {
       this.$router.push({ name: "article" });
+    },
+    todos() {
+      this.$router.push({ name: "todos" });
     }
   }
 };
@@ -36,7 +48,7 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: #35495e;
+  color: @fontColorBlue;
   letter-spacing: 1px;
 }
 </style>
